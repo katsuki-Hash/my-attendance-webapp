@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勤怠アプリ</title>
+</head>
+<body>
+  <h2>勤怠システム</h2>
+
+  <button onclick="checkIn()">出勤</button>
+  <button onclick="checkOut()">退勤</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "ここに貼る",
+      authDomain: "ここに貼る",
+      projectId: "ここに貼る"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const userId = "testUser";
+    const today = new Date().toISOString().slice(0,10);
+
+    window.checkIn = async () => {
+      await setDoc(doc(db, "attendance", today, userId), {
+        userId,
+        checkIn: new Date(),
+        status: "working"
+      }, { merge: true });
+      alert("出勤しました");
+    };
+
+    window.checkOut = async () => {
+      await setDoc(doc(db, "attendance", today, userId), {
+        checkOut: new Date(),
+        status: "done"
+      }, { merge: true });
+      alert("退勤しました");
+    };
+  </script>
+</body>
+</html>
