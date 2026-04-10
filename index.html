@@ -15,31 +15,35 @@
     import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "ここに貼る",
-      authDomain: "ここに貼る",
-      projectId: "ここに貼る"
+      apiKey: "AIzaSyDhyibz0d9rpSx4gvuOpWKsPsKSU1bXZic",
+      authDomain: "my-attendance-webapp.firebaseapp.com",
+      projectId: "my-attendance-webapp"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
     const userId = "testUser";
-    const today = new Date().toISOString().slice(0,10);
+    const today = new Date().toLocaleDateString("sv-SE");
+    const docId = `${today}_${userId}`;
 
     window.checkIn = async () => {
-      await setDoc(doc(db, "attendance", today, userId), {
+      await setDoc(doc(db, "attendance", docId), {
         userId,
         checkIn: new Date(),
         status: "working"
       }, { merge: true });
+
       alert("出勤しました");
     };
 
     window.checkOut = async () => {
-      await setDoc(doc(db, "attendance", today, userId), {
+      await setDoc(doc(db, "attendance", docId), {
+        userId,
         checkOut: new Date(),
         status: "done"
       }, { merge: true });
+
       alert("退勤しました");
     };
   </script>
