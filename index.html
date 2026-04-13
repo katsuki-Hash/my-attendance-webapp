@@ -5,49 +5,22 @@
   <title>勤怠アプリ</title>
 </head>
 <body>
+
   <h2>勤怠システム</h2>
+
+  <input type="email" id="email" placeholder="メール">
+  <input type="password" id="password" placeholder="パスワード">
+
+  <button onclick="signup()">登録</button>
+  <button onclick="login()">ログイン</button>
+  <button onclick="logout()">ログアウト</button>
+
+  <hr>
 
   <button onclick="checkIn()">出勤</button>
   <button onclick="checkOut()">退勤</button>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  <script type="module" src="main.js"></script>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDhyibz0d9rpSx4gvuOpWKsPsKSU1bXZic",
-      authDomain: "my-attendance-webapp.firebaseapp.com",
-      projectId: "my-attendance-webapp"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const userId = "testUser";
-    const today = new Date().toLocaleDateString("sv-SE");
-    const docId = `${today}_${userId}`;
-
-    window.checkIn = async () => {
-      await setDoc(doc(db, "attendance", docId), {
-        userId,
-        checkIn: new Date(),
-        status: "working"
-      }, { merge: true });
-
-      alert("出勤しました");
-    };
-
-    window.checkOut = async () => {
-      await setDoc(doc(db, "attendance", docId), {
-        userId,
-        checkOut: new Date(),
-        status: "done"
-      }, { merge: true });
-
-      alert("退勤しました");
-    };
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-　<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 </body>
 </html>
