@@ -10,7 +10,7 @@ https://my-attendance-webapp.web.app/
 パスワード：password123
 
 ■ 使用技術
-・フロントエンド：HTML / JavaScript
+・フロントエンド：HTML / JavaScript　/　CSS
 ・バックエンド：Firebase
   * Authentication（ユーザー認証）
   * Firestore（データベース）
@@ -36,7 +36,7 @@ https://my-attendance-webapp.web.app/
 　重複打刻防止
 　出勤前の退勤防止
 ・CSVダウンロード機能
-　勤怠データをExcel形式で出力可能
+　勤怠データをCSV形式で出力可能
 
 ■ 工夫した点
 
